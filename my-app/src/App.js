@@ -1,23 +1,23 @@
-import logo from './logo.svg';
+import React, { useState, useEffect } from 'react';
+import DateGraph from './components/DateGraph';
+import TimeGraph from './components/TimeGraph';
+import fetchData from './utils/fetchData';
 import './App.css';
 
 function App() {
+  const [data, setData] = useState([]);
+  const [selectedDate, setSelectedDate] = useState(null);
+
+  useEffect(() => {
+    const url = 'https://www.jsonkeeper.com/b/P2VO';
+    fetchData(url).then((data) => setData(data));
+  }, []);
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h1>Customer Scheduling Patterns</h1>
+      <DateGraph data={data} setSelectedDate={setSelectedDate} />
+      {selectedDate && <TimeGraph data={data} selectedDate={selectedDate} />}
     </div>
   );
 }
