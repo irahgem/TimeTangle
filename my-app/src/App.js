@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import DateGraph from './components/DateGraph';
 import TimeGraph from './components/TimeGraph';
-import fetchData from './utils/fetchData';
+import fetchData from './components/utils/fetchData';
 import './App.css';
 
 function App() {
@@ -9,8 +9,7 @@ function App() {
   const [selectedDate, setSelectedDate] = useState(null);
 
   useEffect(() => {
-    const url = 'https://www.jsonkeeper.com/b/P2VO';
-    fetchData(url).then((data) => setData(data));
+    fetchData().then((data) => setData(data));
   }, []);
 
   return (
