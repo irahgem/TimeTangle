@@ -16,15 +16,14 @@ function TimeGraph({ data, selectedDate }) {
     if (date === selectedDate && scheduleTime.getDate() === selectedDateTime.getDate()) {
       if (slot === 'L') {
         timeSlotsData['9am-12pm']++;
+      } else if (scheduleTime.getHours() < 15) {
+        timeSlotsData['12pm-3pm']++;
+      } else if (scheduleTime.getHours() < 18) {
+        timeSlotsData['3pm-6pm']++;
       } else {
-        if (scheduleTime.getHours() < 18) {
-          timeSlotsData['12pm-3pm']++;
-        } else {
-          timeSlotsData['3pm-6pm']++;
-        }
         timeSlotsData['6pm-9pm']++;
       }
-    }
+    }    
   });
 
   // convert the time slots object to an array for chart.js

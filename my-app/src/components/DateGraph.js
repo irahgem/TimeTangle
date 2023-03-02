@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Bar } from 'react-chartjs-2';
+import './DateGraph.css'
 
 function DateGraph({ data, setSelectedDate }) {
   const [chartData, setChartData] = useState(null);
@@ -38,7 +39,7 @@ function DateGraph({ data, setSelectedDate }) {
   };
 
   return (
-    <div>
+    <div className="chart-container">
       {chartDataObject && (
         <Bar
           data={chartDataObject}
