@@ -5,6 +5,7 @@ function TimeGraph({ data, selectedDate }) {
   // aggregate the data by time slot
   const timeSlots = ['9am-12pm', '12pm-3pm', '3pm-6pm', '6pm-9pm'];
   const timeSlotsData = {};
+
   timeSlots.forEach((slot) => {
     timeSlotsData[slot] = 0;
   });
@@ -13,52 +14,61 @@ function TimeGraph({ data, selectedDate }) {
     const slot = schedule.slot;
     const scheduleTime = new Date(schedule.schedule_time);
     const selectedDateTime = new Date(selectedDate);
-    if (date === selectedDate && scheduleTime.getDate() === selectedDateTime.getDate()) {
+
+    if (date === selectedDate && scheduleTime.getDate() === selectedDateTime.getDate()) { // add this condition to check for the selected date
       if (slot === 'L') {
         timeSlotsData['9am-12pm']++;
-      } else if (scheduleTime.getHours() < 15) {
-        timeSlotsData['12pm-3pm']++;
-      } else if (scheduleTime.getHours() < 18) {
-        timeSlotsData['3pm-6pm']++;
       } else {
-        timeSlotsData['6pm-9pm']++;
+        if (scheduleTime.getHours() >= 9 && scheduleTime.getHours() < 12) {
+          timeSlotsData['9am-12pm']++;
+        } else if (scheduleTime.getHours() >= 12 && scheduleTime.getHours() < 15) {
+          timeSlotsData['12pm-3pm']++;
+        } else if (scheduleTime.getHours() >= 15 && scheduleTime.getHours() < 18) {
+          timeSlotsData['3pm-6pm']++;
+        } else if (scheduleTime.getHours() >= 18 && scheduleTime.getHours() < 21) {
+          timeSlotsData['6pm-9pm']++;
+        }
       }
-    }    
+    }
+
   });
 
-  // convert the time slots object to an array for chart.js
-  const timeSlotsArray = Object.keys(timeSlotsData).map((key) => timeSlotsData[key]);
 
-  // create the chart data
+  // create the chart data object
   const chartData = {
     labels: timeSlots,
     datasets: [
       {
-        label: 'Scheduled meals',
-        data: timeSlotsArray,
-        backgroundColor: [
-          'rgba(255, 99, 132, 0.2)',
-          'rgba(54, 162, 235, 0.2)',
-          'rgba(255, 206, 86, 0.2)',
-          'rgba(75, 192, 192, 0.2)',
-        ],
-        borderColor: [
-          'rgba(255, 99, 132, 1)',
-          'rgba(54, 162, 235, 1)',
-          'rgba(255, 206, 86, 1)',
-          'rgba(75, 192, 192, 1)',
-        ],
+        label: `Scheduled Time Slots for ${selectedDate.toLocaleDateString()}`, // convert the selectedDate to a string
+        data: Object.values(timeSlotsData),
+        backgroundColor: 'rgba(75,192,192,0.4)',
+        borderColor: 'rgba(75,192,192,1)',
         borderWidth: 1,
       },
     ],
-};
+  };
+
+  // set the chart options
+  const chartOptions = {
+    scales: {
+      yAxes: [
+        {
+          ticks: {
+            beginAtZero: true,
+            stepSize: 1,
+          },
+        },
+      ],
+    },
+  };
 
   return (
     <div>
-        <h3>Time Graph for {selectedDate}</h3>
-        <Bar data={chartData} />
+      <h3>Time Scheduled Graph for {selectedDate.toLocaleDateString()}</h3>
+      <Bar data={chartData} options={chartOptions} />
     </div>
   );
 }
+
 
 export default TimeGraph;

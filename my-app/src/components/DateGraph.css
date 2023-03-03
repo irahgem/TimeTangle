@@ -1,5 +1,15 @@
-.chart-container {
+/* .chart-container {
     display: flex;
     justify-content: center;
     align-items: center;
-  }  
+  }   */
+
+  .chart-container {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  
+  .time-graph-container {
+    margin-top: 20px;
+  }
+  

@@ -1,0 +1,26 @@
+.chart-container {
+    position: relative;
+    margin-top: 20px;
+  }
+  
+  .chart-container canvas {
+    width: 100% !important;
+    height: auto !important;
+  }
+  
+  .time-slot-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 20px;
+  }
+  
+  .time-slot-label {
+    font-size: 14px;
+    font-weight: bold;
+  }
+  
+  .time-slot-value {
+    font-size: 14px;
+  }
+  

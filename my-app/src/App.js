@@ -9,7 +9,6 @@ import Chart from 'chart.js/auto';
 function App() {
   const [data, setData] = useState(x);
   const [selectedDate, setSelectedDate] = useState(null);
-  console.log(x)
   // useEffect(() => {
   //   console.log(x)
   //   fetchData().then((data) => setData(data));
