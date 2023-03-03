@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/TimeTangle/static/css/main.88737e98.css",
+    "main.js": "/TimeTangle/static/js/main.ca8b201c.js",
+    "index.html": "/TimeTangle/index.html",
+    "main.88737e98.css.map": "/TimeTangle/static/css/main.88737e98.css.map",
+    "main.ca8b201c.js.map": "/TimeTangle/static/js/main.ca8b201c.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.88737e98.css",
+    "static/js/main.ca8b201c.js"
+  ]
+}
